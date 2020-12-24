@@ -1,3 +1,4 @@
+
 variables:
   public-space:        &public-space         default
   admin-space:         &admin-space          admin
@@ -8,6 +9,11 @@ variables:
   external-space:      &external-space       external
 
 applications:
+  ceph-osd:
+    bindings:
+      "": *public-space
+      "public": *storage-space
+      "cluster": *cluster-space
   ceph-mon:
     bindings:
       "": *public-space
