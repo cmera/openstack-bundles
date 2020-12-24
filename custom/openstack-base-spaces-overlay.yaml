@@ -1,6 +1,6 @@
 
 variables:
-  public-space:        &public-space         default
+  public-space:        &public-space         public
   admin-space:         &admin-space          admin
   compute-space:       &compute-space        data
   internal-space:      &internal-space       internal
@@ -72,19 +72,19 @@ applications:
       "shared-db": *internal-space
   nova-compute:
     bindings:
-      "": *internal-space
+      "": *public-space
   openstack-dashboard:
     bindings:
-      "": *internal-space
+      "": *public-space
   rabbitmq-server:
     bindings:
-      "": *internal-space
+      "": *public-space
   ovn-central:
     bindings:
       "": *internal-space
   vault:
     bindings:
-      "": *internal-space
+      "": *public-space
   ntp:
     bindings:
-      "": *internal-space
+      "": *public-space
