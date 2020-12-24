@@ -1,0 +1,84 @@
+variables:
+  public-space:        &public-space         default
+  admin-space:         &admin-space          admin
+  compute-space:       &compute-space        data
+  internal-space:      &internal-space       internal
+  storage-space:       &storage-space        storagedata
+  cluster-space:       &cluster-space        storagecluster
+  external-space:      &external-space       external
+
+applications:
+  ceph-mon:
+    bindings:
+      "": *public-space
+      "public": *storage-space
+      "cluster": *cluster-space
+  ceph-radosgw:
+    bindings:
+      "": *public-space
+      "public": *public-space
+      "admin": *admin-space
+      "internal": *internal-space
+  cinder:
+    bindings:
+      "": *public-space
+      "public": *public-space
+      "admin": *admin-space
+      "internal": *internal-space
+      "shared-db": *internal-space
+  glance:
+    bindings:
+      "": *public-space
+      "public": *public-space
+      "admin": *admin-space
+      "internal": *internal-space
+      "shared-db": *internal-space
+      "ceph": *storage-space
+  keystone:
+    bindings:
+      "": *public-space
+      "public": *public-space
+      "admin": *admin-space
+      "internal": *internal-space
+  mysql-innodb-cluster:
+    bindings:
+      "": *public-space
+      "shared-db": *internal-space
+  neutron-api:
+    bindings:
+      "": *public-space
+      "public": *public-space
+      "admin": *admin-space
+      "internal": *internal-space
+      "shared-db": *internal-space
+  placement:
+    bindings:
+      "": *public-space
+      "public": *public-space
+      "admin": *admin-space
+      "internal": *internal-space
+  nova-cloud-controller:
+    bindings:
+      "": *public-space
+      "public": *public-space
+      "admin": *admin-space
+      "internal": *internal-space
+      "shared-db": *internal-space
+  nova-compute:
+    bindings:
+      "": *internal-space
+  openstack-dashboard:
+    bindings:
+      "": *internal-space
+  rabbitmq-server:
+    bindings:
+      "": *internal-space
+  ovn-central:
+    bindings:
+      "": *internal-space
+  vault:
+    bindings:
+      "": *internal-space
+  ntp:
+    bindings:
+      "": *internal-space
